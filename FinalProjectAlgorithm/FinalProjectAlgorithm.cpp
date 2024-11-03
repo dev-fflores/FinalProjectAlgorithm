@@ -1,48 +1,32 @@
+
 #include "pch.h"
-#include <iostream>
 #include <conio.h>
 #include "GameObjects.h"
+#include "FinalProjectAlgorithm.h"
 
-using namespace System;
-using namespace std;
 
 int main()
 {
 	srand(time(NULL));
-
-	Player* player = new Player(100, { 0,0 }, 10, spr_player);
+	Console::SetWindowSize(160, 50);
 
 	// Mover al jugador con las teclas W, A, S, D en la consola usando Conole::SetCursorPosition
+	Map* map = new Map(spr_map_01);
+
+	Player* player = new Player(100, {70,20}, 10, spr_player);
+
+	Car* car = new Car(spr_car_01_left);
+	Ally* ally = new Ally(spr_ally_01);
+
+	map->start();
+	player->start();
+	car->start();
+	ally->start();
+
 	while (true)
 	{
-		system("cls");
-		for (int y = 0; y < 5; y++)
-		{
-			for (int x = 0; x < 4; x++)
-			{
-				Console::SetCursorPosition(player->position.x + x, player->position.y + y);
-				cout << player->sprite[y][x];
-			}
-		}
-
-		char input = _getch();
-
-		if (input == 'w')
-		{
-			player->position.y--;
-		}
-		else if (input == 's')
-		{
-			player->position.y++;
-		}
-		else if (input == 'a')
-		{
-			player->position.x--;
-		}
-		else if (input == 'd')
-		{
-			player->position.x++;
-		}
+		player->update();
+		//map->draw();
 	}
 
 

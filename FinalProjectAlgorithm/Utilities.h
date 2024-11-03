@@ -1,8 +1,5 @@
 #pragma once
 
-const int SCREEN_WIDTH = 160;
-const int SCREEN_HEIGHT = 50;
-
 struct Vector2
 {
 	float x, y;
