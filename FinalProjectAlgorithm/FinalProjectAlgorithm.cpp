@@ -124,7 +124,7 @@ bool isThirsty(int* message, const int size)
 
 bool isInDanger(int* message, const int size)
 {
-    for (int i = 0; i < size - 3; i++)
+    for (int i = 0; i <= size - 3; i++)
     {
         if (message[i] == 6 && message[i + 1] == 6 && message[i + 2] == 6) {
             return true;
