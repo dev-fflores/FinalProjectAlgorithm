@@ -101,25 +101,22 @@ bool isHungry(int* message, const int size)
 bool isThirsty(int* message, const int size)
 {
     int code[3] = { 6,0,6 };
-    bool code_has_founded[3] = { false, false, false };
+    int match_index = 0;
 
     for (int i = 0; i < size; i++)
     {
-        if (message[i] == code[0]) {
-            code_has_founded[0] = true;
+        if (message[i] == code[match_index]) {
+            match_index++;
+            if (match_index == 3) {
+                return true;
+            }
         }
-
-        if(code_has_founded[0] && message[i] == code[1]) {
-            code_has_founded[1] = true;
+        else if (message[i] == code[0]) {
+            match_index = 1;
         }
-
-        if (code_has_founded[1] && message[i] == code[2]) {
-            code_has_founded[2] = true;
+        else {
+            match_index = 0;
         }
-    }
-
-    if (code_has_founded[0] && code_has_founded[1] && code_has_founded[2]) {
-        return true;
     }
 
     return false;
