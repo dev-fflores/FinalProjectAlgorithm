@@ -66,6 +66,7 @@ struct Player
 			for (int x = 0; x < 3; x++)
 			{
 				Console::SetCursorPosition(position.x + x, position.y + y);
+				Console::BackgroundColor = ConsoleColor::Gray;
 				cout << " ";
 			}
 		}
