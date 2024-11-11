@@ -22,26 +22,26 @@ int main() {
     int* message;
     message = nullptr;
     
-    int size_message = 0;
+    int message_size = 0;
 
     do {
-        delete[] message;
+        cout << message_size;
+        message = generateMessage(message_size);
+        cout << message_size;
 
-        message = generateMessage(size_message);
+        printMessage(message,message_size);
 
-        printMessage(message,size_message);
-
-        if (isHungry(message, size_message)) {
+        if (isHungry(message, message_size)) {
             cout << "Las personas tienen hambre!" << endl;
             hungry_counter++;
         }
 
-        if (isThirsty(message, size_message)) {
+        if (isThirsty(message, message_size)) {
             cout << "Las personas tienen sed!" << endl;
             thirsty_counter++;
         }
 
-        if (isInDanger(message, size_message)) {
+        if (isInDanger(message, message_size)) {
             cout << "Peligro!" << endl;
         }
 
@@ -51,10 +51,10 @@ int main() {
         cout << endl << endl;
 
         total_messages++;
+        delete[] message;
 
     } while (option != 'X' && option != 'x');
 
-    // Mostrar el reporte
     cout << "\nReporte Final:" << endl;
     cout << "Total de mensajes procesados: " << total_messages << endl;
     cout << "Cantidad de veces que se solicito agua por calor: " << thirsty_counter << endl;
@@ -65,13 +65,13 @@ int main() {
 
 int* generateMessage(int& size)
 {
-    int digits[3] = { 0, 6, 7 };
+    int digits_to_fill[3] = { 0, 6, 7 };
     size = getRandomNumber(10, 20);
     int* message = new int[size];
 
     for (int i = 0; i < size; i++)
     {
-        message[i] = digits[getRandomNumber(0, 2)];
+        message[i] = digits_to_fill[getRandomNumber(0, 2)];
     }
 
     return message;
