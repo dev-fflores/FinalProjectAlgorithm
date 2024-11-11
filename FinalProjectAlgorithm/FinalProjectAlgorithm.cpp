@@ -22,7 +22,7 @@ int main() {
     int* message;
     message = nullptr;
     
-    int size_message = 2;
+    int size_message = 0;
 
     do {
         delete[] message;
