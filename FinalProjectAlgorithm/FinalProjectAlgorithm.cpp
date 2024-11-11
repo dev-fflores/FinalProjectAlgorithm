@@ -57,8 +57,8 @@ int main() {
     // Mostrar el reporte
     cout << "\nReporte Final:" << endl;
     cout << "Total de mensajes procesados: " << total_messages << endl;
-    cout << "Cantidad de veces que se solicitó agua por calor: " << thirsty_counter << endl;
-    cout << "Cantidad de veces que se solicitó alimento por hambre: " << hungry_counter << endl;
+    cout << "Cantidad de veces que se solicito agua por calor: " << thirsty_counter << endl;
+    cout << "Cantidad de veces que se solicito alimento por hambre: " << hungry_counter << endl;
 
     return 0;
 }
