@@ -29,19 +29,19 @@ struct Player
 
 	void move(char input_direction)
 	{
-		if (input_direction == 'w')
+		if (input_direction == 'w' || input_direction == 'W')
 		{
 			position.y--;
 		}
-		else if (input_direction == 's')
+		else if (input_direction == 's' || input_direction == 'S')
 		{
 			position.y++;
 		}
-		else if (input_direction == 'a')
+		else if (input_direction == 'a' || input_direction == 'A')
 		{
 			position.x--;
 		}
-		else if (input_direction == 'd')
+		else if (input_direction == 'd' || input_direction == 'D')
 		{
 			position.x++;
 		}
@@ -66,6 +66,11 @@ struct Player
 			for (int x = 0; x < 3; x++)
 			{
 				Console::SetCursorPosition(position.x + x, position.y + y);
+
+				if (spr_map_01[(int)position.x + x][(int)position.y + y] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (spr_map_01[(int)position.x + x][(int)position.y + y] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (spr_map_01[(int)position.x + x][(int)position.y + y] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (spr_map_01[(int)position.x + x][(int)position.y + y] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
 				cout << " ";
 			}
 		}
@@ -236,13 +241,14 @@ struct Map
 			{
 				/*Console::SetCursorPosition(x, y);
 				cout << map[y][x];*/
-				if (map[y][x] == 0) Console::ForegroundColor = ConsoleColor::Cyan;
-				if (map[y][x] == 1) Console::ForegroundColor = ConsoleColor::Yellow;
-				if (map[y][x] == 2) Console::ForegroundColor = ConsoleColor::Gray;
-				if (map[y][x] == 3) Console::ForegroundColor = ConsoleColor::DarkRed;
+				if (map[y][x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (map[y][x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (map[y][x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (map[y][x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
 
 
-				cout << (char)219;
+				//cout << (char)219;
+				cout << " ";
 			}
 		}
 	}
