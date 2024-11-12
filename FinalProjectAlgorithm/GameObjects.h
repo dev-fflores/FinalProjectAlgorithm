@@ -66,11 +66,7 @@ struct Player
 			for (int x = 0; x < 3; x++)
 			{
 				Console::SetCursorPosition(position.x + x, position.y + y);
-
-				if (spr_map_01[(int)position.x + x][(int)position.y + y] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
-				if (spr_map_01[(int)position.x + x][(int)position.y + y] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
-				if (spr_map_01[(int)position.x + x][(int)position.y + y] == 2) Console::BackgroundColor = ConsoleColor::Gray;
-				if (spr_map_01[(int)position.x + x][(int)position.y + y] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+				Console::BackgroundColor = ConsoleColor::Gray;
 				cout << " ";
 			}
 		}
