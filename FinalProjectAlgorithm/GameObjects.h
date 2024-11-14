@@ -14,8 +14,9 @@ struct Player
 	Vector2 position;
 	int score;
 	char sprite[5][4];
+	int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH];
 
-	Player(int health, Vector2 position, int score, const char sprite[5][4])
+	Player(int health, Vector2 position, int score, const char sprite[5][4], const int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH])
 		: health(health), position(position), score(score)
 	{
 		for (int i = 0; i < 5; ++i)
@@ -23,6 +24,14 @@ struct Player
 			for (int j = 0; j < 3; ++j)
 			{
 				this->sprite[i][j] = sprite[i][j];
+			}
+		}
+
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
 			}
 		}
 	}
@@ -53,7 +62,18 @@ struct Player
 		{
 			for (int x = 0; x < 3; x++)
 			{
-				Console::SetCursorPosition(position.x + x, position.y + y);
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+
+				Console::ForegroundColor = ConsoleColor::Black;
 				cout << sprite[y][x];
 			}
 		}
@@ -65,13 +85,25 @@ struct Player
 		{
 			for (int x = 0; x < 3; x++)
 			{
-				Console::SetCursorPosition(position.x + x, position.y + y);
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+
+
 				cout << " ";
 			}
 		}
 	}
 
 	void start() {
+		Console::CursorVisible = false;
 		draw();
 	}
 

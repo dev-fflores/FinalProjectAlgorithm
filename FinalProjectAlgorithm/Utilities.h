@@ -2,7 +2,7 @@
 
 struct Vector2
 {
-	float x, y;
+	int x, y;
 };
 
 int getRand(int min, int max)
