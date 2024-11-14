@@ -13,7 +13,7 @@ int main()
 	// Mover al jugador con las teclas W, A, S, D en la consola usando Conole::SetCursorPosition
 	Map* map = new Map(spr_map_01);
 
-	Player* player = new Player(100, {70,20}, 10, spr_player);
+	Player* player = new Player(100, {70,20}, 10, spr_player, map->map);
 
 	Car* car = new Car(spr_car_01_left);
 	Ally* ally = new Ally(spr_ally_01);
