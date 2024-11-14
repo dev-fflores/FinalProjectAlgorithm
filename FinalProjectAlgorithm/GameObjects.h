@@ -62,7 +62,18 @@ struct Player
 		{
 			for (int x = 0; x < 3; x++)
 			{
-				Console::SetCursorPosition(position.x + x, position.y + y);
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+
+				Console::ForegroundColor = ConsoleColor::Black;
 				cout << sprite[y][x];
 			}
 		}
@@ -74,13 +85,25 @@ struct Player
 		{
 			for (int x = 0; x < 3; x++)
 			{
-				Console::SetCursorPosition(position.x + x, position.y + y);
-				cout << backup_map[(int)position.y + y][(int)position.x + x];
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+
+
+				cout << " ";
 			}
 		}
 	}
 
 	void start() {
+		Console::CursorVisible = false;
 		draw();
 	}
 
