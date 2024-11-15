@@ -124,11 +124,28 @@ struct Ally
 	int health;
 	Vector2 position;
 	char sprite[3][3];
+	ConsoleColor color;
 
-	Ally(const char sprite[3][3])
+	Ally(const char sprite[3][3], ConsoleColor color)
 	{
+		this->color = color;
+
 		position.x = getRand(0, SCREEN_WIDTH - 4);
 		position.y = getRand(0, SCREEN_HEIGHT - 4);
+
+		for (int y = 0; y < 3; y++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				this->sprite[y][x] = sprite[y][x];
+			}
+		}
+	}
+
+	Ally(const char sprite[3][3], Vector2 position, ConsoleColor color)
+	{
+		this->color = color;
+		this->position = position;
 
 		for (int y = 0; y < 3; y++)
 		{
@@ -186,9 +203,12 @@ struct Car
 	Vector2 position;
 	int direction;
 	char sprite[3][9];
+	ConsoleColor color;
 
-	Car(const char sprite[3][9])
+	Car(const char sprite[3][9], ConsoleColor color)
 	{
+		this->color = color;
+
 		position.x = getRand(0, 160 - 10);
 		position.y = getRand(0, 50 - 4);
 
@@ -201,8 +221,9 @@ struct Car
 		}
 	}
 
-	Car(const char sprite[5][4], Vector2 position)
+	Car(const char sprite[5][4], Vector2 position, ConsoleColor color)
 	{
+		this->color = color;
 		this->position = position;
 
 		for (int y = 0; y < 3; y++)
@@ -221,6 +242,7 @@ struct Car
 			for (int x = 0; x < 9; x++)
 			{
 				Console::SetCursorPosition(position.x + x, position.y + y);
+				Console::ForegroundColor = color;
 				cout << sprite[y][x];
 			}
 		}
@@ -306,18 +328,48 @@ struct Map
 struct Game
 {
 	Player* player;
-	Ally* allies;
+	Ally* allies[5];
 	TrafficLight* traffic_lights;
-	Car* cars;
+	Car* cars[5];
 	Map* map;
 
-	Game(Player* player, Ally* allies, TrafficLight* traffic_lights, Car* cars, Map* map)
-		: player(player), allies(allies), traffic_lights(traffic_lights), cars(cars), map(map)
+	bool is_running = true;
+
+	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights, Car* cars[5], Map* map)
+		: player(player), traffic_lights(traffic_lights), map(map)
 	{
+		for (int i = 0; i < 5; i++)
+		{
+			this->allies[i] = allies[i];
+			this->cars[i] = cars[i];
+		}
+	}
+
+	void start()
+	{
+		map->start();
+		player->start();
+
+		for (int i = 0; i < 5; i++)
+		{
+			allies[i]->start();
+			cars[i]->start();
+		}
 	}
 
 	void update()
 	{
 		player->update();
+
+		for (int i = 0; i < 5; i++)
+		{
+			allies[i]->update();
+			cars[i]->update();
+		}
+	}
+
+	bool isRunning()
+	{
+		return is_running;
 	}
 };
