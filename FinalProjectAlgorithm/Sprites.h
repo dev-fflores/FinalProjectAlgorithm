@@ -5,7 +5,6 @@ const int SCREEN_WIDTH = 160;
 const int SCREEN_HEIGHT = 50;
 
 #pragma region Sprites de los carros
-
 const char spr_car_01_left[3][9] = {
 { ' ', ' ', '-', '-', '-', '-', ' ', ' ', ' ' },
 { '_', '/', ' ', 'L', ' ', ' ', '\\', '_', ' ' },
@@ -224,14 +223,12 @@ const char spr_car_05_down[4][5] = {
 #pragma endregion
 
 #pragma region Sprites de los aliados
-
 const char spr_ally_01[3][3] = {
 { '|', '-', '|'},
 { '|', '?', '|'},
 { '|', '_', '|'},
 
 };
-
 const char spr_ally_02[3][3] = {
 { ' ', '-', ' '},
 { '/', '@', '\\'},
@@ -241,7 +238,6 @@ const char spr_ally_02[3][3] = {
  /@\
  \_/*/
 };
-
 const char spr_ally_03[3][3] = {
 
 { '/', '|', '\\'},
@@ -252,7 +248,6 @@ const char spr_ally_03[3][3] = {
   |#|
   \|/*/
 };
-
 const char spr_ally_04[3][3] = {
 
 { '!', '^', '!'},
@@ -266,7 +261,6 @@ const char spr_ally_04[3][3] = {
 
 
 };
-
 const char spr_ally_05[3][3] = {
 { '~', '~', '~'},
 { '-', '+', '-'},
@@ -277,11 +271,9 @@ const char spr_ally_05[3][3] = {
    ~~~ */
 
 };
-
 #pragma endregion
 
 #pragma region Sprite del jugador
-
 const char spr_player[5][4] = {
 	{ ' ', 'O', ' '},
 	{ '/', '|', '\\'},
@@ -289,12 +281,40 @@ const char spr_player[5][4] = {
 	{ '/', ' ', '\\'},
 	{ ' ', ' ', ' ',}
 };
-
 #pragma endregion
 
 #pragma region Sprites del semáforo
 
-const char spr_traffic_light[5][4] = {
+const char spr_traffic_light[14][7] = {
+
+{ '|', '-', '-', '-', '-', '-', '|'},
+{ '|', ' ', ' ', '●', ' ', ' ', '|'},
+{ '|', ' ', ' ', ' ', ' ', ' ', '|'},
+{ '|', ' ', ' ', '● ', ' ', ' ', '|'},
+{ '|', ' ', ' ', ' ', ' ', ' ', '|'},
+{ '|', ' ', ' ', '●', ' ', ' ', '|'},
+{ '|', '_', '_', '_', '_', '_', '|'},
+{ ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+{ ' ', ' ', ' ', '|', ' ', ' ', ' '},
+{ ' ', ' ', ' ', '|', ' ', ' ', ' '},
+{ ' ', ' ', ' ', '|', ' ', ' ', ' '},
+{ ' ', ' ', ' ', '|', ' ', ' ', ' '},
+{ ' ', ' ', ' ', '|', ' ', ' ', ' '},
+{ ' ', ' ', '-', '-', '-', ' ', ' '}
+
+
+/*|-----|
+  |  ●  |
+  |     |
+  |  ●  |
+  |     |
+  |  ●  |
+  |_____|
+     |
+     |
+     |
+     |
+    --- */
 };
 
 #pragma endregion
