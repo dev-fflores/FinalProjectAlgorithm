@@ -226,23 +226,56 @@ const char spr_car_05_down[4][5] = {
 #pragma region Sprites de los aliados
 
 const char spr_ally_01[3][3] = {
-
 { '|', '-', '|'},
 { '|', '?', '|'},
 { '|', '_', '|'},
 
 };
 
-const char spr_ally_02[5][4] = {
+const char spr_ally_02[3][3] = {
+{ ' ', '-', ' '},
+{ '/', '@', '\\'},
+{ '\\', '_', '/'},
+
+/*_
+ /@\
+ \_/*/
 };
 
-const char spr_ally_03[5][4] = {
+const char spr_ally_03[3][3] = {
+
+{ '/', '|', '\\'},
+{ '|', '#', '|'},
+{ '\\', '|', '/'},
+
+/*/|\
+  |#|
+  \|/*/
 };
 
-const char spr_ally_04[5][4] = {
+const char spr_ally_04[3][3] = {
+
+{ '!', '^', '!'},
+{ '^', 'o', '^'},
+{ '!', 'v', '!'},
+
+/* !^!
+   ^O^
+   !v! */
+
+
+
 };
 
-const char spr_ally_05[5][4] = {
+const char spr_ally_05[3][3] = {
+{ '~', '~', '~'},
+{ '-', '+', '-'},
+{ '~', '~', '~'},
+
+/* ~~~
+   -O-
+   ~~~ */
+
 };
 
 #pragma endregion
