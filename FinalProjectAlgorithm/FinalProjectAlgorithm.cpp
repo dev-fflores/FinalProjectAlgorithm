@@ -20,8 +20,7 @@ int main()
 	Car* car_03 = new Car(spr_car_01_left, ConsoleColor::Blue);
 	Car* car_04 = new Car(spr_car_01_left, ConsoleColor::Yellow);
 	Car* car_05 = new Car(spr_car_01_left, ConsoleColor::Magenta);
-
-
+	
 	Ally* ally_01 = new Ally(spr_ally_01, ConsoleColor::Red);
 	Ally* ally_02 = new Ally(spr_ally_01, ConsoleColor::Green);
 	Ally* ally_03 = new Ally(spr_ally_01, ConsoleColor::Blue);

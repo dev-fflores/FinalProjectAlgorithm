@@ -187,6 +187,7 @@ struct Ally
 
 	void update()
 	{
+
 		//clear();
 		draw();
 	}
@@ -204,10 +205,17 @@ struct Car
 	int direction;
 	char sprite[3][9];
 	ConsoleColor color;
+	float dx;
+
+
+	float aleatorio_decimal() {
+		return  0.1 + ((float)(rand() % 60) / 80);
+	}
 
 	Car(const char sprite[3][9], ConsoleColor color)
 	{
 		this->color = color;
+		dx = 1.0;
 
 		position.x = getRand(0, 160 - 10);
 		position.y = getRand(0, 50 - 4);
@@ -235,6 +243,8 @@ struct Car
 		}
 	}
 	
+
+
 	void draw()
 	{
 		for (int y = 0; y < 3; y++)
@@ -244,6 +254,8 @@ struct Car
 				Console::SetCursorPosition(position.x + x, position.y + y);
 				Console::ForegroundColor = color;
 				cout << sprite[y][x];
+
+
 			}
 		}
 	}
@@ -251,7 +263,10 @@ struct Car
 	void clear()
 	{
 		Console::SetCursorPosition(position.x, position.y);
-		cout << " ";
+
+
+
+		cout << "      ";
 	}
 
 	void start()
@@ -261,8 +276,20 @@ struct Car
 
 	void update()
 	{
-		//clear();
-		draw();
+		
+			clear();
+
+
+			
+			position.x += dx;
+			
+			draw();
+			if (position.x >= 100) {  
+				dx = -1.0;
+			}
+			if (position.x <= 0) {  
+				dx = 1.0;  
+			}
 	}
 };
 
@@ -354,6 +381,7 @@ struct Game
 		{
 			allies[i]->start();
 			cars[i]->start();
+
 		}
 	}
 
