@@ -16,16 +16,16 @@ int main()
 	Player* player = new Player(100, {70,20}, 10, spr_player, map->map);
 
 	Car* car_01 = new Car(spr_car_01_left, ConsoleColor::Red);
-	Car* car_02 = new Car(spr_car_01_left, ConsoleColor::Green);
-	Car* car_03 = new Car(spr_car_01_left, ConsoleColor::Blue);
-	Car* car_04 = new Car(spr_car_01_left, ConsoleColor::Yellow);
-	Car* car_05 = new Car(spr_car_01_left, ConsoleColor::Magenta);
+	Car* car_02 = new Car(spr_car_02_left, ConsoleColor::Green);
+	Car* car_03 = new Car(spr_car_03_left, ConsoleColor::Blue);
+	Car* car_04 = new Car(spr_car_04_left, ConsoleColor::Yellow);
+	Car* car_05 = new Car(spr_car_05_left, ConsoleColor::Magenta);
 	
 	Ally* ally_01 = new Ally(spr_ally_01, ConsoleColor::Red);
-	Ally* ally_02 = new Ally(spr_ally_01, ConsoleColor::Green);
-	Ally* ally_03 = new Ally(spr_ally_01, ConsoleColor::Blue);
-	Ally* ally_04 = new Ally(spr_ally_01, ConsoleColor::Yellow);
-	Ally* ally_05 = new Ally(spr_ally_01, ConsoleColor::Magenta);
+	Ally* ally_02 = new Ally(spr_ally_02, ConsoleColor::Green);
+	Ally* ally_03 = new Ally(spr_ally_03, ConsoleColor::Blue);
+	Ally* ally_04 = new Ally(spr_ally_04, ConsoleColor::Yellow);
+	Ally* ally_05 = new Ally(spr_ally_05, ConsoleColor::Magenta);
 
 	TrafficLight* traffic_lights = new TrafficLight();
 

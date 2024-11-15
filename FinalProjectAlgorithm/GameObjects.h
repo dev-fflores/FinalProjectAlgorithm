@@ -72,6 +72,9 @@ struct Player
 				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
 				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
 				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
+				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
+				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
 
 				Console::ForegroundColor = ConsoleColor::Black;
 				cout << sprite[y][x];
@@ -95,7 +98,10 @@ struct Player
 				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
 				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
 				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
-
+				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
+				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
+				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
+				
 
 				cout << " ";
 			}
@@ -255,7 +261,6 @@ struct Car
 				Console::ForegroundColor = color;
 				cout << sprite[y][x];
 
-
 			}
 		}
 	}
@@ -263,8 +268,6 @@ struct Car
 	void clear()
 	{
 		Console::SetCursorPosition(position.x, position.y);
-
-
 
 		cout << "      ";
 	}
@@ -280,7 +283,6 @@ struct Car
 			clear();
 
 
-			
 			position.x += dx;
 			
 			draw();
@@ -321,6 +323,9 @@ struct Map
 				if (map[y][x] == 1) Console::ForegroundColor = ConsoleColor::Yellow;
 				if (map[y][x] == 2) Console::ForegroundColor = ConsoleColor::Gray;
 				if (map[y][x] == 3) Console::ForegroundColor = ConsoleColor::DarkRed;
+				if (map[y][x] == 4) Console::ForegroundColor = ConsoleColor::Green;
+				if (map[y][x] == 5) Console::ForegroundColor = ConsoleColor::DarkMagenta;
+				if (map[y][x] == 6) Console::ForegroundColor = ConsoleColor::DarkGray;
 
 
 				cout << (char)219;
