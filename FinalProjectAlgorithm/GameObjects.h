@@ -212,15 +212,12 @@ struct Car
 	char sprite[3][9];
 	ConsoleColor color;
 	float dx;
+	int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 
-	float aleatorio_decimal() {
-		return  0.1 + ((float)(rand() % 60) / 80);
-	}
-
-	Car(const char sprite[3][9], ConsoleColor color)
+	Car(const char sprite[3][9], ConsoleColor color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH])
+		: color(color)
 	{
-		this->color = color;
 		dx = 1.0;
 
 		position.x = getRand(0, 160 - 10);
@@ -233,11 +230,21 @@ struct Car
 				this->sprite[y][x] = sprite[y][x];
 			}
 		}
+
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
+			}
+		}
 	}
 
-	Car(const char sprite[5][4], Vector2 position, ConsoleColor color)
+	Car(const char sprite[3][9], Vector2 position, ConsoleColor color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH])
+		: color(color)
 	{
-		this->color = color;
+		dx = 1.0;
+
 		this->position = position;
 
 		for (int y = 0; y < 3; y++)
@@ -247,8 +254,15 @@ struct Car
 				this->sprite[y][x] = sprite[y][x];
 			}
 		}
+
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
+			}
+		}
 	}
-	
 
 
 	void draw()
@@ -267,9 +281,28 @@ struct Car
 
 	void clear()
 	{
-		Console::SetCursorPosition(position.x, position.y);
+		for (int y = 0; y < 3; y++)
+		{
+			for (int x = 0; x < 9; x++)
+			{
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
 
-		cout << "      ";
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
+				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
+				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
+
+
+				cout << " ";
+			}
+		}
 	}
 
 	void start()
