@@ -270,7 +270,29 @@ struct Car
 		}
 	}
 
+	Car(const char sprite[4][5], Vector2 position, ConsoleColor color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
+	{
+		this->color = color;
+		this->position = position;
+		this->direction = direction;
+		this->speed = speed;
 
+		for (int y = 0; y < 4; y++)
+		{
+			for (int x = 0; x < 5; x++)
+			{
+				this->sprite[y][x] = sprite[y][x];
+			}
+		}
+
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
+			}
+		}
+	}
 
 	void draw()
 	{
@@ -371,7 +393,7 @@ struct Car
 
 struct Map
 {
-	int map[SCREEN_HEIGHT][SCREEN_WIDTH];
+	int map [SCREEN_HEIGHT][SCREEN_WIDTH];
 
 	// Inicializar mapa con altura y anchura de la consola
 	Map(const int input_map[SCREEN_HEIGHT][SCREEN_WIDTH])
@@ -402,8 +424,7 @@ struct Map
 				if (map[y][x] == 6) Console::ForegroundColor = ConsoleColor::DarkGray;
 
 
-				//cout << (char)219;
-				cout << " ";
+				cout << (char)219;
 			}
 		}
 	}
