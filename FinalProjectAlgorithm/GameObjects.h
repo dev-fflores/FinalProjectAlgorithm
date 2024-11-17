@@ -72,6 +72,9 @@ struct Player
 				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
 				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
 				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
+				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
+				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
 
 				Console::ForegroundColor = ConsoleColor::Black;
 				cout << sprite[y][x];
@@ -95,6 +98,9 @@ struct Player
 				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
 				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
 				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
+				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
+				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
 
 
 				cout << " ";
@@ -187,6 +193,7 @@ struct Ally
 
 	void update()
 	{
+
 		//clear();
 		draw();
 	}
@@ -201,13 +208,18 @@ struct Car
 {
 	int health;
 	Vector2 position;
-	int direction;
 	char sprite[3][9];
 	ConsoleColor color;
+	float dx, dy;
+	Vector2 direction;
+	int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH];
+	float speed;
 
-	Car(const char sprite[3][9], ConsoleColor color)
+	Car(const char sprite[3][9], ConsoleColor color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
 	{
 		this->color = color;
+		this->direction = direction;
+		this->speed = speed;
 
 		position.x = getRand(0, 160 - 10);
 		position.y = getRand(0, 50 - 4);
@@ -219,12 +231,22 @@ struct Car
 				this->sprite[y][x] = sprite[y][x];
 			}
 		}
+
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
+			}
+		}
 	}
 
-	Car(const char sprite[5][4], Vector2 position, ConsoleColor color)
+	Car(const char sprite[3][9], Vector2 position, ConsoleColor color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
 	{
 		this->color = color;
 		this->position = position;
+		this->direction = direction;
+		this->speed = speed;
 
 		for (int y = 0; y < 3; y++)
 		{
@@ -233,15 +255,38 @@ struct Car
 				this->sprite[y][x] = sprite[y][x];
 			}
 		}
+
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
+			}
+		}
 	}
-	
+
+
+
 	void draw()
 	{
 		for (int y = 0; y < 3; y++)
 		{
 			for (int x = 0; x < 9; x++)
 			{
-				Console::SetCursorPosition(position.x + x, position.y + y);
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
+				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
+				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
+
 				Console::ForegroundColor = color;
 				cout << sprite[y][x];
 			}
@@ -250,8 +295,31 @@ struct Car
 
 	void clear()
 	{
-		Console::SetCursorPosition(position.x, position.y);
-		cout << " ";
+
+		for (int y = 0; y < 3; y++)
+		{
+			for (int x = 0; x < 9; x++)
+			{
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
+				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
+				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
+
+
+				cout << " ";
+			}
+		}
+
+
 	}
 
 	void start()
@@ -261,7 +329,37 @@ struct Car
 
 	void update()
 	{
-		//clear();
+
+		clear();
+
+
+		if (direction.x == 1)
+		{
+			position.x += speed;
+		}
+		else if (direction.x == -1)
+		{
+			position.x -= speed;
+		}
+		else if (direction.y == 1)
+		{
+			position.y += speed;
+		}
+		else if (direction.y == -1)
+		{
+			position.y -= speed;
+		}
+
+		if (position.x < 1 || position.x > SCREEN_WIDTH - 10) {
+			direction.x *= -1;
+		}
+
+		if (position.y < 1 || position.y > SCREEN_HEIGHT - 4) {
+			direction.y *= -1;
+		}
+
+
+
 		draw();
 	}
 };
@@ -290,10 +388,13 @@ struct Map
 			{
 				/*Console::SetCursorPosition(x, y);
 				cout << map[y][x];*/
-				if (map[y][x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
-				if (map[y][x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
-				if (map[y][x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
-				if (map[y][x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+				if (map[y][x] == 0) Console::ForegroundColor = ConsoleColor::Cyan;
+				if (map[y][x] == 1) Console::ForegroundColor = ConsoleColor::Yellow;
+				if (map[y][x] == 2) Console::ForegroundColor = ConsoleColor::Gray;
+				if (map[y][x] == 3) Console::ForegroundColor = ConsoleColor::DarkRed;
+				if (map[y][x] == 4) Console::ForegroundColor = ConsoleColor::Green;
+				if (map[y][x] == 5) Console::ForegroundColor = ConsoleColor::DarkMagenta;
+				if (map[y][x] == 6) Console::ForegroundColor = ConsoleColor::DarkGray;
 
 
 				//cout << (char)219;
@@ -355,6 +456,7 @@ struct Game
 		{
 			allies[i]->start();
 			cars[i]->start();
+
 		}
 	}
 
