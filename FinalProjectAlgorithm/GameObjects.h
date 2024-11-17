@@ -12,13 +12,18 @@ struct Player
 {
 	int health;
 	Vector2 position;
+	Color color;
 	int score;
 	char sprite[5][4];
 	int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH];
 
-	Player(int health, Vector2 position, int score, const char sprite[5][4], const int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH])
-		: health(health), position(position), score(score)
+	Player(Color color, Vector2 position, int score, const char sprite[5][4], const int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH])
 	{
+		this->color = color;
+		this->health = health;
+		this->position = position;
+		this->score = score;
+
 		for (int i = 0; i < 5; ++i)
 		{
 			for (int j = 0; j < 3; ++j)
@@ -76,8 +81,8 @@ struct Player
 				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
 				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
 
-				Console::ForegroundColor = ConsoleColor::Black;
-				cout << sprite[y][x];
+				//Console::ForegroundColor = ConsoleColor::Black;
+				cout << rgb_color(color) << sprite[y][x];
 			}
 		}
 	}
@@ -130,9 +135,9 @@ struct Ally
 	int health;
 	Vector2 position;
 	char sprite[3][3];
-	ConsoleColor color;
+	Color color;
 
-	Ally(const char sprite[3][3], ConsoleColor color)
+	Ally(const char sprite[3][3], Color color)
 	{
 		this->color = color;
 
@@ -148,7 +153,7 @@ struct Ally
 		}
 	}
 
-	Ally(const char sprite[3][3], Vector2 position, ConsoleColor color)
+	Ally(const char sprite[3][3], Vector2 position, Color color)
 	{
 		this->color = color;
 		this->position = position;
@@ -169,7 +174,7 @@ struct Ally
 			for (int x = 0; x < 3; x++)
 			{
 				Console::SetCursorPosition(position.x + x, position.y + y);
-				cout << sprite[y][x];
+				cout << rgb_color(color) << sprite[y][x];
 			}
 		}
 	}
@@ -209,13 +214,13 @@ struct Car
 	int health;
 	Vector2 position;
 	char sprite[3][9];
-	ConsoleColor color;
+	Color color;
 	float dx, dy;
 	Vector2 direction;
 	int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH];
 	float speed;
 
-	Car(const char sprite[3][9], ConsoleColor color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
+	Car(const char sprite[3][9], Color color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
 	{
 		this->color = color;
 		this->direction = direction;
@@ -241,7 +246,7 @@ struct Car
 		}
 	}
 
-	Car(const char sprite[3][9], Vector2 position, ConsoleColor color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
+	Car(const char sprite[3][9], Vector2 position, Color color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
 	{
 		this->color = color;
 		this->position = position;
@@ -287,8 +292,8 @@ struct Car
 				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
 				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
 
-				Console::ForegroundColor = color;
-				cout << sprite[y][x];
+				//Console::ForegroundColor = color;
+				cout << rgb_color(color) << sprite[y][x];
 			}
 		}
 	}
