@@ -73,13 +73,13 @@ struct Player
 				Console::SetCursorPosition(pos_x, pos_y);
 				//cout << backup_map[pos_y][pos_x];
 
-				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
-				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
-				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
-				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
-				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
-				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
-				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
+				if (backup_map[pos_y][pos_x] == 0) std::cout << setBackgroundColor({ 0, 255, 255 }); //cyan
+				if (backup_map[pos_y][pos_x] == 1) std::cout << setBackgroundColor({ 255, 255, 0 }); //yellow
+				if (backup_map[pos_y][pos_x] == 2) std::cout << setBackgroundColor({ 200, 200, 200 }); //gray
+				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
+				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
+				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 255, 255, 0 }); // dark gay
 
 				//Console::ForegroundColor = ConsoleColor::Black;
 				cout << setForegroundColor(color) << sprite[y][x];
@@ -99,13 +99,13 @@ struct Player
 				Console::SetCursorPosition(pos_x, pos_y);
 				//cout << backup_map[pos_y][pos_x];
 
-				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
-				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
-				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
-				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
-				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
-				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
-				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
+				if (backup_map[pos_y][pos_x] == 0) std::cout << setBackgroundColor({ 0, 255, 255 }); //cyan
+				if (backup_map[pos_y][pos_x] == 1) std::cout << setBackgroundColor({ 255, 255, 0 }); //yellow
+				if (backup_map[pos_y][pos_x] == 2) std::cout << setBackgroundColor({ 200, 200, 200 }); //gray
+				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
+				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
+				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 255, 255, 0 }); // dark gay
 
 
 				cout << " ";
@@ -290,13 +290,13 @@ struct Car
 				Console::SetCursorPosition(pos_x, pos_y);
 				//cout << backup_map[pos_y][pos_x];
 
-				if (backup_map[pos_y][pos_x] == 0) std::cout << setBackgroundColor({0,255,255});
-				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
-				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
-				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
-				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
-				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
-				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
+				if (backup_map[pos_y][pos_x] == 0) std::cout << setBackgroundColor({ 0, 255, 255 }); //cyan
+				if (backup_map[pos_y][pos_x] == 1) std::cout << setBackgroundColor({ 255, 255, 0 }); //yellow
+				if (backup_map[pos_y][pos_x] == 2) std::cout << setBackgroundColor({ 200, 200, 200 }); //gray
+				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
+				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
+				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 255, 255, 0 }); // dark gay
 
 				//Console::ForegroundColor = color;
 				cout << setForegroundColor(color) << sprite[y][x];
@@ -317,13 +317,13 @@ struct Car
 				Console::SetCursorPosition(pos_x, pos_y);
 				//cout << backup_map[pos_y][pos_x];
 
-				if (backup_map[pos_y][pos_x] == 0) std::cout << setBackgroundColor({ 0,255,255 });
-				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
-				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
-				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
-				if (backup_map[pos_y][pos_x] == 4) Console::BackgroundColor = ConsoleColor::Green;
-				if (backup_map[pos_y][pos_x] == 5) Console::BackgroundColor = ConsoleColor::DarkMagenta;
-				if (backup_map[pos_y][pos_x] == 6) Console::BackgroundColor = ConsoleColor::DarkGray;
+				if (backup_map[pos_y][pos_x] == 0) std::cout << setBackgroundColor({ 0, 255, 255 }); //cyan
+				if (backup_map[pos_y][pos_x] == 1) std::cout << setBackgroundColor({ 255, 255, 0 }); //yellow
+				if (backup_map[pos_y][pos_x] == 2) std::cout << setBackgroundColor({ 200, 200, 200 }); //gray
+				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
+				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
+				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 255, 255, 0 }); // dark gay
 
 
 				cout << " ";
@@ -399,13 +399,13 @@ struct Map
 			{
 				/*Console::SetCursorPosition(x, y);
 				cout << map[y][x];*/
-				if (map[y][x] == 0) std::cout << setForegroundColor({0, 255, 255}) << "";
-				if (map[y][x] == 1) Console::ForegroundColor = ConsoleColor::Yellow;
-				if (map[y][x] == 2) Console::ForegroundColor = ConsoleColor::Gray;
-				if (map[y][x] == 3) Console::ForegroundColor = ConsoleColor::DarkRed;
-				if (map[y][x] == 4) Console::ForegroundColor = ConsoleColor::Green;
-				if (map[y][x] == 5) Console::ForegroundColor = ConsoleColor::DarkMagenta;
-				if (map[y][x] == 6) Console::ForegroundColor = ConsoleColor::DarkGray;
+				if (map[y][x] == 0) std::cout << setForegroundColor({0, 255, 255}); //cyan
+				if (map[y][x] == 1) std::cout << setForegroundColor({ 255, 255, 0 }); //yellow
+				if (map[y][x] == 2) std::cout << setForegroundColor({ 200, 200, 200 }); //gray
+				if (map[y][x] == 3) std::cout << setForegroundColor({ 128, 0, 32 }); // dark red
+				if (map[y][x] == 4) std::cout << setForegroundColor({ 34, 139, 34 }); // dark green
+				if (map[y][x] == 5) std::cout << setForegroundColor({ 128, 0, 128 });// dark magenta
+				if (map[y][x] == 6) std::cout << setForegroundColor({ 255, 255, 0 }); // dark gay
 
 
 				cout << (char)219;
