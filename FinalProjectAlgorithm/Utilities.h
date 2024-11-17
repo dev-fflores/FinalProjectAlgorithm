@@ -3,7 +3,7 @@ using namespace std;
 
 struct Vector2
 {
-	int x, y;
+	float x, y;
 };
 
 int getRand(int min, int max)
