@@ -14,8 +14,9 @@ struct Player
 	Vector2 position;
 	int score;
 	char sprite[5][4];
+	int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH];
 
-	Player(int health, Vector2 position, int score, const char sprite[5][4])
+	Player(int health, Vector2 position, int score, const char sprite[5][4], const int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH])
 		: health(health), position(position), score(score)
 	{
 		for (int i = 0; i < 5; ++i)
@@ -23,6 +24,14 @@ struct Player
 			for (int j = 0; j < 3; ++j)
 			{
 				this->sprite[i][j] = sprite[i][j];
+			}
+		}
+
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
 			}
 		}
 	}
@@ -53,7 +62,18 @@ struct Player
 		{
 			for (int x = 0; x < 3; x++)
 			{
-				Console::SetCursorPosition(position.x + x, position.y + y);
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+
+				Console::ForegroundColor = ConsoleColor::Black;
 				cout << sprite[y][x];
 			}
 		}
@@ -65,14 +85,25 @@ struct Player
 		{
 			for (int x = 0; x < 3; x++)
 			{
-				Console::SetCursorPosition(position.x + x, position.y + y);
-				Console::BackgroundColor = ConsoleColor::Gray;
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				//cout << backup_map[pos_y][pos_x];
+
+				if (backup_map[pos_y][pos_x] == 0) Console::BackgroundColor = ConsoleColor::Cyan;
+				if (backup_map[pos_y][pos_x] == 1) Console::BackgroundColor = ConsoleColor::Yellow;
+				if (backup_map[pos_y][pos_x] == 2) Console::BackgroundColor = ConsoleColor::Gray;
+				if (backup_map[pos_y][pos_x] == 3) Console::BackgroundColor = ConsoleColor::DarkRed;
+
+
 				cout << " ";
 			}
 		}
 	}
 
 	void start() {
+		Console::CursorVisible = false;
 		draw();
 	}
 
@@ -93,11 +124,28 @@ struct Ally
 	int health;
 	Vector2 position;
 	char sprite[3][3];
+	ConsoleColor color;
 
-	Ally(const char sprite[3][3])
+	Ally(const char sprite[3][3], ConsoleColor color)
 	{
+		this->color = color;
+
 		position.x = getRand(0, SCREEN_WIDTH - 4);
 		position.y = getRand(0, SCREEN_HEIGHT - 4);
+
+		for (int y = 0; y < 3; y++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				this->sprite[y][x] = sprite[y][x];
+			}
+		}
+	}
+
+	Ally(const char sprite[3][3], Vector2 position, ConsoleColor color)
+	{
+		this->color = color;
+		this->position = position;
 
 		for (int y = 0; y < 3; y++)
 		{
@@ -155,9 +203,12 @@ struct Car
 	Vector2 position;
 	int direction;
 	char sprite[3][9];
+	ConsoleColor color;
 
-	Car(const char sprite[3][9])
+	Car(const char sprite[3][9], ConsoleColor color)
 	{
+		this->color = color;
+
 		position.x = getRand(0, 160 - 10);
 		position.y = getRand(0, 50 - 4);
 
@@ -170,8 +221,9 @@ struct Car
 		}
 	}
 
-	Car(const char sprite[5][4], Vector2 position)
+	Car(const char sprite[5][4], Vector2 position, ConsoleColor color)
 	{
+		this->color = color;
 		this->position = position;
 
 		for (int y = 0; y < 3; y++)
@@ -190,6 +242,7 @@ struct Car
 			for (int x = 0; x < 9; x++)
 			{
 				Console::SetCursorPosition(position.x + x, position.y + y);
+				Console::ForegroundColor = color;
 				cout << sprite[y][x];
 			}
 		}
@@ -276,18 +329,48 @@ struct Map
 struct Game
 {
 	Player* player;
-	Ally* allies;
+	Ally* allies[5];
 	TrafficLight* traffic_lights;
-	Car* cars;
+	Car* cars[5];
 	Map* map;
 
-	Game(Player* player, Ally* allies, TrafficLight* traffic_lights, Car* cars, Map* map)
-		: player(player), allies(allies), traffic_lights(traffic_lights), cars(cars), map(map)
+	bool is_running = true;
+
+	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights, Car* cars[5], Map* map)
+		: player(player), traffic_lights(traffic_lights), map(map)
 	{
+		for (int i = 0; i < 5; i++)
+		{
+			this->allies[i] = allies[i];
+			this->cars[i] = cars[i];
+		}
+	}
+
+	void start()
+	{
+		map->start();
+		player->start();
+
+		for (int i = 0; i < 5; i++)
+		{
+			allies[i]->start();
+			cars[i]->start();
+		}
 	}
 
 	void update()
 	{
 		player->update();
+
+		for (int i = 0; i < 5; i++)
+		{
+			allies[i]->update();
+			cars[i]->update();
+		}
+	}
+
+	bool isRunning()
+	{
+		return is_running;
 	}
 };
