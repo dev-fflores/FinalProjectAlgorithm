@@ -17,7 +17,7 @@ int main()
 
 	Car* car_01 = new Car(spr_car_01_left, {80, 4}, {255, 0, 0}, map->map, {0, 1}, 0.15f);
 	Car* car_02 = new Car(spr_car_02_left, {76, 4}, { 0, 255, 0 }, map->map, { 0, 1 }, 0.15f);
-	Car* car_03 = new Car(spr_car_02_left, {70, 4}, { 0, 0, 255 }, map->map, { 0, 1 }, 0.15f);
+	Car* car_03 = new Car(spr_car_01_up, {70, 4}, { 0, 0, 255 }, map->map, { 0, 1 }, 0.15f);
 	/*Car* car_02 = new Car(spr_car_02_left, ConsoleColor::Green, map->map);
 	Car* car_03 = new Car(spr_car_03_left, ConsoleColor::Blue, map->map);
 	Car* car_04 = new Car(spr_car_04_left, ConsoleColor::Yellow, map->map);

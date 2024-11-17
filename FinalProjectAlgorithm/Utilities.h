@@ -28,6 +28,16 @@ void printArray(int* arr, int size)
 }
 
 // Función para generar códigos ANSI RGB
-std::string rgb_color(Color color) {
+std::string setForegroundColor(Color color) {
 	return "\033[38;2;" + std::to_string(color.r) + ";" + std::to_string(color.g) + ";" + std::to_string(color.b) + "m";
+}
+
+// Función para cambiar el fondo
+std::string setBackgroundColor(Color color) {
+	return "\033[48;2;" + std::to_string(color.r) + ";" + std::to_string(color.g) + ";" + std::to_string(color.b) + "m";
+}
+
+// Resetear colores
+std::string resetColors() {
+	return "\033[0m";
 }
