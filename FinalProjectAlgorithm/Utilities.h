@@ -1,9 +1,16 @@
 #pragma once
+#include <string>
+
 using namespace std;
 
 struct Vector2
 {
 	float x, y;
+};
+
+struct Color
+{
+	int r, g, b;
 };
 
 int getRand(int min, int max)
@@ -18,4 +25,9 @@ void printArray(int* arr, int size)
 		cout << arr[i] << " ";
 	}
 	cout << endl;
+}
+
+// Función para generar códigos ANSI RGB
+std::string rgb_color(Color color) {
+	return "\033[38;2;" + std::to_string(color.r) + ";" + std::to_string(color.g) + ";" + std::to_string(color.b) + "m";
 }
