@@ -213,27 +213,32 @@ struct Car
 {
 	int health;
 	Vector2 position;
-	char sprite[3][9];
+	char** sprite; // Arreglo dinámico para el sprite
 	Color color;
 	float dx, dy;
 	Vector2 direction;
 	int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH];
 	float speed;
+	int sprite_width;  // Ancho del sprite
+	int sprite_height; // Alto del sprite
 
-	Car(const char sprite[3][9], Color color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
+	Car(const char** sprite, int sprite_width, int sprite_height, Color color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
 	{
 		this->color = color;
 		this->direction = direction;
 		this->speed = speed;
+		this->sprite_height = sprite_height;
+		this->sprite_width = sprite_width;
 
 		position.x = getRand(0, 160 - 10);
 		position.y = getRand(0, 50 - 4);
 
-		for (int y = 0; y < 3; y++)
-		{
-			for (int x = 0; x < 9; x++)
-			{
-				this->sprite[y][x] = sprite[y][x];
+		// Asignar memoria para el sprite dinámico
+		this->sprite = new char* [sprite_height];
+		for (int i = 0; i < sprite_height; i++) {
+			this->sprite[i] = new char[sprite_width];
+			for (int j = 0; j < sprite_width; j++) {
+				this->sprite[i][j] = sprite[i][j];
 			}
 		}
 
@@ -246,42 +251,21 @@ struct Car
 		}
 	}
 
-	Car(const char sprite[3][9], Vector2 position, Color color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
+	Car(const char** sprite, int sprite_width, int sprite_height, Vector2 position, Color color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
 	{
 		this->color = color;
 		this->position = position;
 		this->direction = direction;
 		this->speed = speed;
+		this->sprite_height = sprite_height;
+		this->sprite_width = sprite_width;
 
-		for (int y = 0; y < 3; y++)
-		{
-			for (int x = 0; x < 9; x++)
-			{
-				this->sprite[y][x] = sprite[y][x];
-			}
-		}
-
-		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
-		{
-			for (size_t j = 0; j < SCREEN_WIDTH; j++)
-			{
-				this->backup_map[i][j] = backup_map[i][j];
-			}
-		}
-	}
-
-	Car(const char sprite[4][5], Vector2 position, Color color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
-	{
-		this->color = color;
-		this->position = position;
-		this->direction = direction;
-		this->speed = speed;
-
-		for (int y = 0; y < 4; y++)
-		{
-			for (int x = 0; x < 5; x++)
-			{
-				this->sprite[y][x] = sprite[y][x];
+		// Asignar memoria para el sprite dinámico
+		this->sprite = new char* [sprite_height];
+		for (int i = 0; i < sprite_height; i++) {
+			this->sprite[i] = new char[sprite_width];
+			for (int j = 0; j < sprite_width; j++) {
+				this->sprite[i][j] = sprite[i][j];
 			}
 		}
 
@@ -296,9 +280,9 @@ struct Car
 
 	void draw()
 	{
-		for (int y = 0; y < 3; y++)
+		for (int y = 0; y < sprite_height; y++)
 		{
-			for (int x = 0; x < 9; x++)
+			for (int x = 0; x < sprite_width; x++)
 			{
 				int pos_x = position.x + x;
 				int pos_y = position.y + y;
@@ -323,9 +307,9 @@ struct Car
 	void clear()
 	{
 
-		for (int y = 0; y < 3; y++)
+		for (int y = 0; y < sprite_height; y++)
 		{
-			for (int x = 0; x < 9; x++)
+			for (int x = 0; x < sprite_width; x++)
 			{
 				int pos_x = position.x + x;
 				int pos_y = position.y + y;

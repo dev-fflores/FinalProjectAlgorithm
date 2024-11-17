@@ -1,22 +1,23 @@
 ﻿#pragma once
+#include "Utilities.h"
 // Sprites de todo el juego
 
 const int SCREEN_WIDTH = 160;
 const int SCREEN_HEIGHT = 50;
 
-#pragma region Sprites de los carros
-const char spr_car_01_left[3][9] = {
-{ ' ', ' ', '-', '-', '-', '-', ' ', ' ', ' ' },
-{ '_', '/', ' ', 'L', ' ', ' ', '\\', '_', ' ' },
-{ 'l', '-', '-', 'O', '-', '-', 'O', '-', 'l' },
 
+#pragma region Sprites de los carros
+const char* spr_car_01_left[] = {
+    "  ----   ",
+    "_/ L  \\_ ",
+    "l--O--O-l"
+};
 
 /* ____  
  _/ L  \_ 
  l--O--O-l*/
 
 
-};
 const char spr_car_01_right[3][9] = {
 { ' ', ' ', '-', '-', '-', '-', ' ', ' ', ' '},
 { '_', '/', ' ', ' ', 'L', ' ', '\\', '_', ' '},
@@ -28,19 +29,19 @@ l-O--O--l*/
 
 
 };
-const char spr_car_01_up[4][5] = {
-{ '|', '.', '-', '.', '|'},
-{ '|', '|', '_', '|', '|'},
-{ '|', '_', '_', '_', '|'},
-{ ' ', '_', '_', '_', ' '},
 
+const char* spr_car_01_up[] = {
+    "|.-.|",
+    "||_||",
+    "|___|",
+    " ___ "
+};
 
 /*|.-.|
  ||-||
  |---|
   ---*/
 
-};
 const char spr_car_01_down[4][5] = {
 { ' ', '-', '-', '-', ' '},
 { '|', '_', '_', '_', '|'},
@@ -372,3 +373,6 @@ const int spr_map_01[SCREEN_HEIGHT][SCREEN_WIDTH] = {
 { 0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	4,	4,	4,	4,	0, 	0, 	0, 	0, 	0, 	0, 	0, 	4,	4,	4,	4,	0, 	0, 	0, 	0, 	0, 	0, 	0, 	4,	4,	4,	4,	0, 	0, 	0, 	0, 	0, 	0, 	0, 	4,	4,	4,	4,	0, 	0, 	0, 	0, 	0, 	0, 	0, 	4,	4,	4,	4,	0, 	0, 	0, 	0, 	0, 	0, 	0, 	4,	4,	4,	4,	0, 	0, 	0, 	0, 	0, 	3,	2,	2,	2,	2,	2,	1,	1,	2,	2,	2,	2,	2,	3,	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0}, };
 
 #pragma endregion
+
+//char** dynamicSpriteLeft = createSprite(spr_car_01_left, 3, 9);
+//char** dynamicSpriteUp = createSprite(spr_car_01_up, 4, 5);

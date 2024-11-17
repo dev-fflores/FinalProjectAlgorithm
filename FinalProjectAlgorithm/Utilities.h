@@ -41,3 +41,22 @@ std::string setBackgroundColor(Color color) {
 std::string resetColors() {
 	return "\033[0m";
 }
+
+
+//char** createSprite(const char* sprite[], int rows, int cols) {
+//    char** dynamicSprite = new char* [rows];
+//    for (int i = 0; i < rows; i++) {
+//        dynamicSprite[i] = new char[cols];
+//        for (int j = 0; j < cols; j++) {
+//            dynamicSprite[i][j] = sprite[i][j];
+//        }
+//    }
+//    return dynamicSprite;
+//}
+//
+//void deleteSprite(char** sprite, int rows) {
+//    for (int i = 0; i < rows; i++) {
+//        delete[] sprite[i];
+//    }
+//    delete[] sprite;
+//}
