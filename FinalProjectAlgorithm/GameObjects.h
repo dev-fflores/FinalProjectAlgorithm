@@ -211,7 +211,7 @@ struct Car
 	int direction;
 	char sprite[3][9];
 	ConsoleColor color;
-	float dx;
+	float dx, dy;
 
 
 	float aleatorio_decimal() {
@@ -222,6 +222,7 @@ struct Car
 	{
 		this->color = color;
 		dx = 1.0;
+		dy = 1.0f;
 
 		position.x = getRand(0, 160 - 10);
 		position.y = getRand(0, 50 - 4);
@@ -267,9 +268,10 @@ struct Car
 
 	void clear()
 	{
+
 		Console::SetCursorPosition(position.x, position.y);
 
-		cout << "      ";
+		
 	}
 
 	void start()
@@ -283,15 +285,25 @@ struct Car
 			clear();
 
 
-			position.x += dx;
+				//pa izquierda derecha
+				position.x += dx;
+				if (position.x >= 160 - 10) {
+					dx = -1.0;
+				}
+				if (position.x <= 0) {
+					dx = 1.0;
+				}
 			
+			//pa arriba abajo
+			position.y += dy;
+			if (position.y >= 50 - 4) {
+				dy = -1.0;
+			}
+			if (position.y <= 0) {
+				dy = 1.0;
+			}
+
 			draw();
-			if (position.x >= 100) {  
-				dx = -1.0;
-			}
-			if (position.x <= 0) {  
-				dx = 1.0;  
-			}
 	}
 };
 
