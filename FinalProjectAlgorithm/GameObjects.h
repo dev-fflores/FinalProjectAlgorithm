@@ -437,6 +437,94 @@ struct Map
 	}
 };
 
+struct UI {
+	Vector2 position;
+	char** sprite;
+	int ui_width;
+	int ui_height;
+	string title;
+	string nickname;
+	string message;
+	int current_level;
+	int score;
+
+	UI(const char** sprite, Vector2 position, int ui_width, int ui_height, string title, string nickname, string message, int current_level, int score)
+	{
+		this->position = position;
+		this->ui_width = ui_width;
+		this->ui_height = ui_height;
+		this->title = title;
+		this->nickname = nickname;
+		this->message = message;
+		this->current_level = current_level;
+		this->score = score;
+
+		this->sprite = new char* [ui_height];
+		for (int i = 0; i < ui_height; i++) {
+			this->sprite[i] = new char[ui_width];
+			for (int j = 0; j < ui_width; j++) {
+				this->sprite[i][j] = sprite[i][j];
+			}
+		}
+	}
+
+	void draw()
+	{
+		for (int y = 0; y < ui_height; y++)
+		{
+			for (int x = 0; x < ui_width; x++)
+			{
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				cout << sprite[y][x];
+			}
+		}
+	}
+
+	void clear()
+	{
+		for (int y = 0; y < ui_height; y++)
+		{
+			for (int x = 0; x < ui_width; x++)
+			{
+				int pos_x = position.x + x;
+				int pos_y = position.y + y;
+
+				Console::SetCursorPosition(pos_x, pos_y);
+				cout << " ";
+			}
+		}
+	}
+
+	void start()
+	{
+		draw();
+
+		int padding_left = 3;
+
+		Console::SetCursorPosition(position.x + padding_left, position.y + 1);
+		cout << "Title: " << title;
+		Console::SetCursorPosition(position.x + padding_left, position.y + 2);
+		cout << "Nicname: " << nickname;
+		Console::SetCursorPosition(position.x + padding_left, position.y + 3);
+		cout << "Message: " << message;
+		Console::SetCursorPosition(position.x + padding_left, position.y + 4);
+		cout << "Level: " << current_level;
+		Console::SetCursorPosition(position.x + padding_left, position.y + 5);
+		cout << "Score: " << score;
+	}
+
+	void update()
+	{
+	}
+
+
+};
+
+
+
 struct Game
 {
 	Player* player;
@@ -444,11 +532,12 @@ struct Game
 	TrafficLight* traffic_lights;
 	Car* cars[5];
 	Map* map;
+	UI* ui;
 
 	bool is_running = true;
 
-	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights, Car* cars[5], Map* map)
-		: player(player), traffic_lights(traffic_lights), map(map)
+	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights, Car* cars[5], Map* map, UI* ui)
+		: player(player), traffic_lights(traffic_lights), map(map), ui(ui)
 	{
 		for (int i = 0; i < 5; i++)
 		{
@@ -461,6 +550,7 @@ struct Game
 	{
 		map->start();
 		player->start();
+		ui->start();
 
 		for (int i = 0; i < 5; i++)
 		{

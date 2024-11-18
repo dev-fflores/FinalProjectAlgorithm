@@ -320,6 +320,27 @@ const char spr_traffic_light[14][7] = {
 
 #pragma endregion
 
+#pragma region Sprite UI
+
+// 53*10
+const char* ui_box[] = {
+    "+--------------------------------------------------+",
+    "|                                                  |",
+    "|                                                  |",
+    "|                                                  |",
+    "|                                                  |",
+    "|                                                  |",
+    "|                                                  |",
+    "|                                                  |",
+    "|                                                  |",
+    "+--------------------------------------------------+"
+};
+
+
+
+#pragma endregion
+
+
 #pragma region Sprites de las mapas
 
 const int spr_map_01[SCREEN_HEIGHT][SCREEN_WIDTH] = {

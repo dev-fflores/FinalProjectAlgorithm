@@ -3,6 +3,7 @@
 #include <conio.h>
 #include "GameObjects.h"
 #include "FinalProjectAlgorithm.h"
+#include "Menu.h"
 
 
 int main()
@@ -12,6 +13,8 @@ int main()
 
 	// Mover al jugador con las teclas W, A, S, D en la consola usando Conole::SetCursorPosition
 	Map* map = new Map(spr_map_01);
+
+	UI* ui = new UI(ui_box, {100, 36}, 53, 10, "GAME", "Frank", "Hello", 1, 0);
 
 	Player* player = new Player({ 0, 0, 0 }, {70,20}, 10, spr_player, map->map);
 
@@ -35,7 +38,7 @@ int main()
 	Car* cars[5] = { car_01, car_02 , car_03 , car_01 , car_01 };
 	Ally* allies[5] = { ally_01, ally_02, ally_03, ally_04, ally_05 };
 
-	Game* game = new Game(player, allies, traffic_lights, cars, map);
+	Game* game = new Game(player, allies, traffic_lights, cars, map, ui);
 
 	game->start();
 
