@@ -207,6 +207,48 @@ struct Ally
 struct TrafficLight
 {
 	Vector2 position;
+	char sprite[14][7];
+	Color color;
+
+
+	TrafficLight(const char sprite[14][7], Vector2 position, Color color)
+	{
+		this->color = color;
+		this->position = position;
+
+		for (int y = 0; y < 14; y++)
+		{
+			for (int x = 0; x < 7; x++)
+			{
+				this->sprite[y][x] = sprite[y][x];
+			}
+		}
+	}
+
+	void draw()
+	{
+		for (int y = 0; y < 14; y++)
+		{
+			for (int x = 0; x < 7; x++)
+			{
+				Console::SetCursorPosition(position.x + x, position.y + y);
+				cout << setForegroundColor(color) << sprite[y][x];
+			}
+		}
+	}
+
+	void start()
+	{
+		draw();
+	}
+
+	void update()
+	{
+
+		//clear();
+		draw();
+	}
+	
 };
 
 struct Car
@@ -452,6 +494,7 @@ struct Map
 	}
 };
 
+#pragma endregion
 struct UI {
 	Vector2 position;
 	char** sprite;
@@ -578,6 +621,12 @@ struct Game
 			this->maps[i] = maps[i];
 		}
 	}
+		for (int i = 0; i < 2; i++) {
+			this->traffic_lights[i] = traffic_lights[i];
+		}
+	}
+
+
 
 	void start()
 	{
@@ -591,6 +640,10 @@ struct Game
 			cars[i]->start();
 
 		}
+		for (int i = 0; i < 2; i++) {
+			traffic_lights[i]->start();
+		}
+
 	}
 
 	void update()
@@ -605,6 +658,9 @@ struct Game
 				if (cars[i] != nullptr) {
 					cars[i]->update();
 				}
+			allies[i]->update();
+			cars[i]->update();
+			//traffic_lights[i]->update();
 
 				if (!cars[i]->has_collided && checkCollision(*player, *cars[i])) {
 
