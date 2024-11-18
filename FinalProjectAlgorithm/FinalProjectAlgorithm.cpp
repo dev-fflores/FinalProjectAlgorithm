@@ -19,6 +19,7 @@ int main()
 	Player* player = new Player({ 0, 0, 0 }, {70,20}, 10, spr_player, map->map);
 
 	Car* car_01 = new Car(spr_car_01_left, 9, 3, {149, 18}, {255, 0, 0}, map->map, {-1, 1}, 0.15f);
+
 	/*Car* car_02 = new Car(spr_car_02_left, 9, 3, {149, 21}, {255, 0, 0}, map->map, {-1, 1}, 0.15f);
 	Car* car_03 = new Car(spr_car_03_left, 9, 3, {149, 24}, {255, 0, 0}, map->map, {-1, 1}, 0.15f);
 	Car* car_04 = new Car(spr_car_04_left, 9, 3, {149, 27}, {255, 0, 0}, map->map, {-1, 1}, 0.15f);*/
