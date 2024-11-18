@@ -79,7 +79,11 @@ struct Player
 				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
 				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
 				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
-				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 255, 255, 0 }); // dark gay
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 186, 85, 211 }); // morado claro
+				if (backup_map[pos_y][pos_x] == 7) std::cout << setBackgroundColor({ 255, 255, 0 }); // gris oscuro
+				if (backup_map[pos_y][pos_x] == 8) std::cout << setBackgroundColor({ 220, 220, 230 }); // gris claro
+				if (backup_map[pos_y][pos_x] == 9) std::cout << setBackgroundColor({ 255, 99, 71 }); // rojo
+				if (backup_map[pos_y][pos_x] == 10) std::cout << setBackgroundColor({ 255, 255, 255 }); // blanco
 
 				//Console::ForegroundColor = ConsoleColor::Black;
 				cout << setForegroundColor(color) << sprite[y][x];
@@ -105,7 +109,11 @@ struct Player
 				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
 				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
 				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
-				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 255, 255, 0 }); // dark gay
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 186, 85, 211 }); // morado claro
+				if (backup_map[pos_y][pos_x] == 7) std::cout << setBackgroundColor({ 255, 255, 0 }); // gris oscuro
+				if (backup_map[pos_y][pos_x] == 8) std::cout << setBackgroundColor({ 220, 220, 230 }); // gris claro
+				if (backup_map[pos_y][pos_x] == 9) std::cout << setBackgroundColor({ 255, 99, 71 }); // rojo
+				if (backup_map[pos_y][pos_x] == 10) std::cout << setBackgroundColor({ 255, 255, 255 }); // blanco
 
 
 				cout << " ";
@@ -338,7 +346,11 @@ struct Car
 				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
 				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
 				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
-				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 255, 255, 0 }); // dark gay
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 186, 85, 211 }); // morado claro
+				if (backup_map[pos_y][pos_x] == 7) std::cout << setBackgroundColor({ 255, 255, 0 }); // gris oscuro
+				if (backup_map[pos_y][pos_x] == 8) std::cout << setBackgroundColor({ 220, 220, 230 }); // gris claro
+				if (backup_map[pos_y][pos_x] == 9) std::cout << setBackgroundColor({ 255, 99, 71 }); // rojo
+				if (backup_map[pos_y][pos_x] == 10) std::cout << setBackgroundColor({ 255, 255, 255 }); // blanco
 
 				//Console::ForegroundColor = color;
 				cout << setForegroundColor(color) << sprite[y][x];
@@ -365,7 +377,11 @@ struct Car
 				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
 				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
 				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
-				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 255, 255, 0 }); // dark gay
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 186, 85, 211 }); // morado claro
+				if (backup_map[pos_y][pos_x] == 7) std::cout << setBackgroundColor({ 255, 255, 0 }); // gris oscuro
+				if (backup_map[pos_y][pos_x] == 8) std::cout << setBackgroundColor({ 220, 220, 230 }); // gris claro
+				if (backup_map[pos_y][pos_x] == 9) std::cout << setBackgroundColor({ 255, 99, 71 }); // rojo
+				if (backup_map[pos_y][pos_x] == 10) std::cout << setBackgroundColor({ 255, 255, 255 }); // blanco
 
 
 				cout << " ";
@@ -441,13 +457,17 @@ struct Map
 			{
 				/*Console::SetCursorPosition(x, y);
 				cout << map[y][x];*/
-				if (map[y][x] == 0) std::cout << setForegroundColor({0, 255, 255}); //cyan
-				if (map[y][x] == 1) std::cout << setForegroundColor({ 255, 255, 0 }); //yellow
-				if (map[y][x] == 2) std::cout << setForegroundColor({ 200, 200, 200 }); //gray
-				if (map[y][x] == 3) std::cout << setForegroundColor({ 128, 0, 32 }); // dark red
-				if (map[y][x] == 4) std::cout << setForegroundColor({ 34, 139, 34 }); // dark green
-				if (map[y][x] == 5) std::cout << setForegroundColor({ 128, 0, 128 });// dark magenta
-				if (map[y][x] == 6) std::cout << setForegroundColor({ 255, 255, 0 }); // dark gay
+				if (backup_map[pos_y][pos_x] == 0) std::cout << setBackgroundColor({ 0, 255, 255 }); //cyan
+				if (backup_map[pos_y][pos_x] == 1) std::cout << setBackgroundColor({ 255, 255, 0 }); //yellow
+				if (backup_map[pos_y][pos_x] == 2) std::cout << setBackgroundColor({ 200, 200, 200 }); //gray
+				if (backup_map[pos_y][pos_x] == 3) std::cout << setBackgroundColor({ 128, 0, 32 }); // dark red
+				if (backup_map[pos_y][pos_x] == 4) std::cout << setBackgroundColor({ 34, 139, 34 }); // dark green
+				if (backup_map[pos_y][pos_x] == 5) std::cout << setBackgroundColor({ 128, 0, 128 });// dark magenta
+				if (backup_map[pos_y][pos_x] == 6) std::cout << setBackgroundColor({ 186, 85, 211 }); // morado claro
+				if (backup_map[pos_y][pos_x] == 7) std::cout << setBackgroundColor({ 255, 255, 0 }); // gris oscuro
+				if (backup_map[pos_y][pos_x] == 8) std::cout << setBackgroundColor({ 220, 220, 230 }); // gris claro
+				if (backup_map[pos_y][pos_x] == 9) std::cout << setBackgroundColor({ 255, 99, 71 }); // rojo
+				if (backup_map[pos_y][pos_x] == 10) std::cout << setBackgroundColor({ 255, 255, 255 }); // blanco
 
 
 				cout << (char)219;
@@ -479,7 +499,6 @@ struct Map
 	}
 };
 
-#pragma endregion
 struct UI {
 	Vector2 position;
 	char** sprite;
@@ -623,7 +642,6 @@ struct Game
 		{
 			allies[i]->update();
 			cars[i]->update();
-			traffic_lights[i]->update();
 		}
 	}
 
