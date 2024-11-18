@@ -207,6 +207,48 @@ struct Ally
 struct TrafficLight
 {
 	Vector2 position;
+	char sprite[14][7];
+	Color color;
+
+
+	TrafficLight(const char sprite[14][7], Vector2 position, Color color)
+	{
+		this->color = color;
+		this->position = position;
+
+		for (int y = 0; y < 14; y++)
+		{
+			for (int x = 0; x < 7; x++)
+			{
+				this->sprite[y][x] = sprite[y][x];
+			}
+		}
+	}
+
+	void draw()
+	{
+		for (int y = 0; y < 14; y++)
+		{
+			for (int x = 0; x < 7; x++)
+			{
+				Console::SetCursorPosition(position.x + x, position.y + y);
+				cout << setForegroundColor(color) << sprite[y][x];
+			}
+		}
+	}
+
+	void start()
+	{
+		draw();
+	}
+
+	void update()
+	{
+
+		//clear();
+		draw();
+	}
+	
 };
 
 struct Car
@@ -437,6 +479,7 @@ struct Map
 	}
 };
 
+#pragma endregion
 struct UI {
 	Vector2 position;
 	char** sprite;
@@ -447,6 +490,8 @@ struct UI {
 	string message;
 	int current_level;
 	int score;
+
+	int padding_left = 3;
 
 	UI(const char** sprite, Vector2 position, int ui_width, int ui_height, string title, string nickname, string message, int current_level, int score)
 	{
@@ -502,12 +547,10 @@ struct UI {
 	{
 		draw();
 
-		int padding_left = 3;
-
 		Console::SetCursorPosition(position.x + padding_left, position.y + 1);
 		cout << "Title: " << title;
 		Console::SetCursorPosition(position.x + padding_left, position.y + 2);
-		cout << "Nicname: " << nickname;
+		cout << "Nickname: " << nickname;
 		Console::SetCursorPosition(position.x + padding_left, position.y + 3);
 		cout << "Message: " << message;
 		Console::SetCursorPosition(position.x + padding_left, position.y + 4);
@@ -516,8 +559,11 @@ struct UI {
 		cout << "Score: " << score;
 	}
 
-	void update()
+	void updateScore(int amount)
 	{
+		score += amount;
+		Console::SetCursorPosition(position.x + padding_left, position.y + 5);
+		cout << "Score: " << score;
 	}
 
 
@@ -529,22 +575,27 @@ struct Game
 {
 	Player* player;
 	Ally* allies[5];
-	TrafficLight* traffic_lights;
+	TrafficLight* traffic_lights[2];
 	Car* cars[5];
 	Map* map;
 	UI* ui;
 
 	bool is_running = true;
 
-	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights, Car* cars[5], Map* map, UI* ui)
-		: player(player), traffic_lights(traffic_lights), map(map), ui(ui)
+	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights[2], Car* cars[5], Map* map, UI* ui)
+		: player(player), map(map), ui(ui)
 	{
 		for (int i = 0; i < 5; i++)
 		{
 			this->allies[i] = allies[i];
 			this->cars[i] = cars[i];
 		}
+		for (int i = 0; i < 2; i++) {
+			this->traffic_lights[i] = traffic_lights[i];
+		}
 	}
+
+
 
 	void start()
 	{
@@ -558,6 +609,10 @@ struct Game
 			cars[i]->start();
 
 		}
+		for (int i = 0; i < 2; i++) {
+			traffic_lights[i]->start();
+		}
+
 	}
 
 	void update()
@@ -568,6 +623,7 @@ struct Game
 		{
 			allies[i]->update();
 			cars[i]->update();
+			traffic_lights[i]->update();
 		}
 	}
 
