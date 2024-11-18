@@ -7,6 +7,18 @@
 using namespace System;
 using namespace std;
 
+struct Map {
+	int map[SCREEN_HEIGHT][SCREEN_WIDTH];
+
+	Map(const int input_map[SCREEN_HEIGHT][SCREEN_WIDTH]);
+
+	void draw();
+	void clear();
+	void start();
+	void update();
+};
+
+
 
 struct Player
 {
@@ -86,6 +98,18 @@ struct Player
 			}
 		}
 	}
+
+	void setBackupMap(int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH])
+	{
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
+			}
+		}
+	}
+
 
 	void clear()
 	{
@@ -386,6 +410,17 @@ struct Car
 
 	}
 
+	void setBackupMap(int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH])
+	{
+		for (size_t i = 0; i < SCREEN_HEIGHT; i++)
+		{
+			for (size_t j = 0; j < SCREEN_WIDTH; j++)
+			{
+				this->backup_map[i][j] = backup_map[i][j];
+			}
+		}
+	}
+
 	void start()
 	{
 		draw();
@@ -620,13 +655,10 @@ struct Game
 		{
 			this->maps[i] = maps[i];
 		}
-	}
 		for (int i = 0; i < 2; i++) {
 			this->traffic_lights[i] = traffic_lights[i];
 		}
 	}
-
-
 
 	void start()
 	{
@@ -676,15 +708,23 @@ struct Game
 		}
 
 		// Verificar si es necesario cambiar el mapa
-		if (player->score >= 100) {  // Cambiar a 100 o el puntaje deseado
+		if (player->score >= 50) {  // Cambiar a 100 o el puntaje deseado
 			changeMap();
 		}
 	}
 	void changeMap() {
 		maps[current_map_index]->clear();  // Limpiar el mapa actual
+		player->setBackupMap(maps[current_map_index]->map);
+
+		for (int i = 0; i < 5; i++) {
+			if (cars[i] != nullptr) {
+				cars[i]->setBackupMap(maps[current_map_index]->map);
+			}
+		}
 
 		current_map_index++;
 		if (current_map_index >= 3) {
+			is_running = false;
 			current_map_index = 0;  // Reiniciar si no hay más mapas
 		}
 
