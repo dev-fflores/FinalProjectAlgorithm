@@ -50,6 +50,8 @@ int main()
 
 	TrafficLight* traffic_lights = new TrafficLight();
 
+	
+
 	//Car* cars[5] = { car_01, car_02, car_03, car_04, car_05 };
 	Car* cars[5] = { car_01, car_02 , car_03 , car_04 , car_05, };
 	Ally* allies[5] = { ally_01, ally_02, ally_03, ally_04, ally_05 };

@@ -448,6 +448,8 @@ struct UI {
 	int current_level;
 	int score;
 
+	int padding_left = 3;
+
 	UI(const char** sprite, Vector2 position, int ui_width, int ui_height, string title, string nickname, string message, int current_level, int score)
 	{
 		this->position = position;
@@ -502,12 +504,10 @@ struct UI {
 	{
 		draw();
 
-		int padding_left = 3;
-
 		Console::SetCursorPosition(position.x + padding_left, position.y + 1);
 		cout << "Title: " << title;
 		Console::SetCursorPosition(position.x + padding_left, position.y + 2);
-		cout << "Nicname: " << nickname;
+		cout << "Nickname: " << nickname;
 		Console::SetCursorPosition(position.x + padding_left, position.y + 3);
 		cout << "Message: " << message;
 		Console::SetCursorPosition(position.x + padding_left, position.y + 4);
@@ -516,8 +516,11 @@ struct UI {
 		cout << "Score: " << score;
 	}
 
-	void update()
+	void updateScore(int amount)
 	{
+		score += amount;
+		Console::SetCursorPosition(position.x + padding_left, position.y + 5);
+		cout << "Score: " << score;
 	}
 
 
@@ -535,6 +538,7 @@ struct Game
 	UI* ui;
 
 	bool is_running = true;
+	bool first_collision = false;
 
 	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights, Car* cars[5], Map* map, UI* ui)
 		: player(player), traffic_lights(traffic_lights), map(map), ui(ui)
@@ -568,11 +572,43 @@ struct Game
 		{
 			allies[i]->update();
 			cars[i]->update();
+
+			if (checkCollision(*player, *cars[i])) {
+				// Sumar puntos al score del jugador
+				player->score += 10;  // Por ejemplo, 10 puntos por colisión
+
+				// Opción: Mover el carro a una nueva posición aleatoria
+				/*cars[i]->position.x = getRand(0, 160 - cars[i]->sprite_width);
+				cars[i]->position.y = getRand(0, 50 - cars[i]->sprite_height);*/
+
+				// Mostrar el score actualizado en la consola (opcional)
+				ui->updateScore(10);
+			}
 		}
 	}
 
 	bool isRunning()
 	{
 		return is_running;
+	}
+
+	bool checkCollision(const Player& player, const Car& car) {
+		// Rango del jugador
+		int player_left = player.position.x;
+		int player_right = player.position.x + 3;  // Ancho del sprite del jugador
+		int player_top = player.position.y;
+		int player_bottom = player.position.y + 5;  // Alto del sprite del jugador
+
+		// Rango del carro
+		int car_left = car.position.x;
+		int car_right = car.position.x + car.sprite_width;
+		int car_top = car.position.y;
+		int car_bottom = car.position.y + car.sprite_height;
+
+		// Verificar si los rangos se solapan
+		return !(player_right < car_left ||
+			player_left > car_right ||
+			player_bottom < car_top ||
+			player_top > car_bottom);
 	}
 };
