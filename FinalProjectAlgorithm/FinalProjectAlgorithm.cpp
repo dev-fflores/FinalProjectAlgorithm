@@ -8,8 +8,8 @@
 void inicializar_juego() {
 	// Mover al jugador con las teclas W, A, S, D en la consola usando Conole::SetCursorPosition
 	Map* map_01 = new Map(spr_map_01);
-	Map* map_02 = new Map(spr_map_01);
-	Map* map_03 = new Map(spr_map_01);
+	Map* map_02 = new Map(spr_map_02);
+	Map* map_03 = new Map(spr_map_03);
 
 	Map* maps[3] = { map_01, map_02, map_03 };
 
