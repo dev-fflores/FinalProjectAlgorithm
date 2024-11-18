@@ -48,9 +48,8 @@ int main()
 	Ally* ally_04 = new Ally(spr_ally_04, { 0, 255, 0 });
 	Ally* ally_05 = new Ally(spr_ally_05, { 0, 0, 255 });
 
-	TrafficLight* traffic_lights = new TrafficLight();
-
-	
+	TrafficLight* trafficlight01 = new TrafficLight(spr_traffic_light, { 80, 30 }, { 0, 0, 0 });
+	TrafficLight* trafficlight02 = new TrafficLight(spr_traffic_light, { 20, 30 }, { 0, 0, 0 });
 
 	//Car* cars[5] = { car_01, car_02, car_03, car_04, car_05 };
 	Car* cars[5] = { car_01, car_02 , car_03 , car_04 , car_05, };

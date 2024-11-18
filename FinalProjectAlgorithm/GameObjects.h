@@ -43,19 +43,19 @@ struct Player
 
 	void move(char input_direction)
 	{
-		if (input_direction == 'w' || input_direction == 'W')
+		if ((input_direction == 'w' || input_direction == 'W') && position.y > 1)
 		{
 			position.y--;
 		}
-		else if (input_direction == 's' || input_direction == 'S')
+		else if ((input_direction == 's' || input_direction == 'S') && position.y <  SCREEN_HEIGHT - 10)
 		{
 			position.y++;
 		}
-		else if (input_direction == 'a' || input_direction == 'A')
+		else if ((input_direction == 'a' || input_direction == 'A') && position.x > 4)
 		{
 			position.x--;
 		}
-		else if (input_direction == 'd' || input_direction == 'D')
+		else if ((input_direction == 'd' || input_direction == 'D') && position.x < SCREEN_WIDTH - 5)
 		{
 			position.x++;
 		}
@@ -213,7 +213,7 @@ struct Car
 {
 	int health;
 	Vector2 position;
-	char** sprite; // Arreglo dinámico para el sprite
+	char** sprite;
 	Color color;
 	float dx, dy;
 	Vector2 direction;
@@ -221,6 +221,7 @@ struct Car
 	float speed;
 	int sprite_width;  // Ancho del sprite
 	int sprite_height; // Alto del sprite
+	bool has_collided; 
 
 	Car(const char** sprite, int sprite_width, int sprite_height, Color color, int backup_map[SCREEN_HEIGHT][SCREEN_WIDTH], Vector2 direction, float speed)
 	{
@@ -229,6 +230,7 @@ struct Car
 		this->speed = speed;
 		this->sprite_height = sprite_height;
 		this->sprite_width = sprite_width;
+		has_collided = false;
 
 		position.x = getRand(0, 160 - 10);
 		position.y = getRand(0, 50 - 4);
@@ -259,6 +261,7 @@ struct Car
 		this->speed = speed;
 		this->sprite_height = sprite_height;
 		this->sprite_width = sprite_width;
+		has_collided = false;
 
 		// Asignar memoria para el sprite dinámico
 		this->sprite = new char* [sprite_height];
@@ -276,6 +279,14 @@ struct Car
 				this->backup_map[i][j] = backup_map[i][j];
 			}
 		}
+	}
+
+	~Car()
+	{
+		for (int i = 0; i < sprite_height; i++) {
+			delete[] sprite[i];
+		}
+		delete[] sprite;
 	}
 
 	void draw()
@@ -340,6 +351,10 @@ struct Car
 
 	void update()
 	{
+
+		/*if (has_collided) {
+			return;
+		}*/
 
 		clear();
 
@@ -532,27 +547,41 @@ struct Game
 {
 	Player* player;
 	Ally* allies[5];
-	TrafficLight* traffic_lights;
+	TrafficLight* traffic_lights[2];
 	Car* cars[5];
 	Map* map;
-	UI* ui;
+	UI* ui; 
+	Map* maps[3];  // Arreglo de punteros a mapas (puedes cambiar el tamaño según el número de mapas)
+	int current_map_index;  // Índice del mapa actual
 
 	bool is_running = true;
-	bool first_collision = false;
 
-	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights, Car* cars[5], Map* map, UI* ui)
-		: player(player), traffic_lights(traffic_lights), map(map), ui(ui)
+	Game(Player* player, Ally* allies[5], TrafficLight* traffic_lights[2], Car* cars[5], Map* maps[3], UI* ui)
 	{
+		this->player = player;
+		this->ui = ui;
+		current_map_index = 0;
+
+
 		for (int i = 0; i < 5; i++)
 		{
 			this->allies[i] = allies[i];
 			this->cars[i] = cars[i];
 		}
+
+		for (int i = 0; i < 2; i++) {
+			this->traffic_lights[i] = traffic_lights[i];
+		}
+
+		for (int i = 0; i < 3; i++)
+		{
+			this->maps[i] = maps[i];
+		}
 	}
 
 	void start()
 	{
-		map->start();
+		maps[current_map_index]->start();
 		player->start();
 		ui->start();
 
@@ -570,21 +599,40 @@ struct Game
 
 		for (int i = 0; i < 5; i++)
 		{
-			allies[i]->update();
-			cars[i]->update();
+			if(cars[i] != nullptr){
+				allies[i]->update();
 
-			if (checkCollision(*player, *cars[i])) {
-				// Sumar puntos al score del jugador
-				player->score += 10;  // Por ejemplo, 10 puntos por colisión
+				if (cars[i] != nullptr) {
+					cars[i]->update();
+				}
 
-				// Opción: Mover el carro a una nueva posición aleatoria
-				/*cars[i]->position.x = getRand(0, 160 - cars[i]->sprite_width);
-				cars[i]->position.y = getRand(0, 50 - cars[i]->sprite_height);*/
+				if (!cars[i]->has_collided && checkCollision(*player, *cars[i])) {
 
-				// Mostrar el score actualizado en la consola (opcional)
-				ui->updateScore(10);
+
+					ui->updateScore(10);
+					cars[i]->has_collided = true;
+					// Eliminar el carro
+					cars[i]->clear();
+					delete cars[i];
+					cars[i] = nullptr; // Marcar el espacio como vacío
+				}
 			}
 		}
+
+		// Verificar si es necesario cambiar el mapa
+		if (player->score >= 100) {  // Cambiar a 100 o el puntaje deseado
+			changeMap();
+		}
+	}
+	void changeMap() {
+		maps[current_map_index]->clear();  // Limpiar el mapa actual
+
+		current_map_index++;
+		if (current_map_index >= 3) {
+			current_map_index = 0;  // Reiniciar si no hay más mapas
+		}
+
+		maps[current_map_index]->start();  // Dibujar el nuevo mapa
 	}
 
 	bool isRunning()
